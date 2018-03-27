@@ -256,7 +256,7 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <phase>install</phase>
+                        <phase>integration-test</phase>
                         <goals>
                             <goal>test</goal>
                         </goals>
