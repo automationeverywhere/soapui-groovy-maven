@@ -27,12 +27,6 @@
     </pluginRepositories>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>2.4.3</version>
@@ -47,11 +41,6 @@
                     <artifactId>jfxrt</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>forms</artifactId>
-            <version>1.0.7</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -98,12 +87,6 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>6.1.0.jre8</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -142,16 +125,16 @@
                 <configuration>
                     <testFailIgnore>true</testFailIgnore>
                     <projectFile>${basedir}/projects/CountryInfoService-Latest-soapui-project.xml</projectFile>
-<!--
-                    <testSuite>Adhoc End2End</testSuite>
-                    <testCase>New Customer E2E Order -Validation</testCase>
--->
+                    <!--
+                                        <testSuite>Adhoc End2End</testSuite>
+                                        <testCase>New Customer E2E Order -Validation</testCase>
+                    -->
                     <printReport>true</printReport>
-<!--
-                    <globalProperties>
-                        <value>ENV=QA1</value>
-                    </globalProperties>
--->
+                    <!--
+                                        <globalProperties>
+                                            <value>ENV=QA1</value>
+                                        </globalProperties>
+                    -->
                     <soapuiProperties>
                         <property>
                             <name>soapui.logroot</name>
@@ -235,12 +218,6 @@
                         <groupId>log4j</groupId>
                         <artifactId>log4j</artifactId>
                         <version>1.2.17</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.microsoft.sqlserver</groupId>
-                        <artifactId>mssql-jdbc</artifactId>
-                        <version>6.1.0.jre8</version>
-                        <scope>compile</scope>
                     </dependency>
                     <dependency>
                         <groupId>com.smartbear.soapui</groupId>
