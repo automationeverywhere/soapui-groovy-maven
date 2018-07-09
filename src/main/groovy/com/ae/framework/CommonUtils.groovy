@@ -1,6 +1,5 @@
 package com.ae.framework
 
-import com.ae.framework.FrameworkUtils
 import com.ae.model.DataTable
 import com.ae.model.Iteration
 import com.ae.model.TestCase
@@ -81,7 +80,7 @@ class CommonUtils {
             def testSuiteTestCaseMaxIterationMapKey = "${testSuiteName}#:#${testCaseName}".toString()
             def testSuiteTestCaseMaxIterationMapValue = iterationNum
             if (testSuiteTestCaseMaxIterationMap.get(testSuiteTestCaseMaxIterationMapKey) != null) {
-                if (testSuiteTestCaseMaxIterationMap.get(testSuiteTestCaseMaxIterationMapKey) < testSuiteTestCaseMaxIterationMapValue) {
+                if (Integer.parseInt(testSuiteTestCaseMaxIterationMap.get(testSuiteTestCaseMaxIterationMapKey)) < Integer.parseInt(testSuiteTestCaseMaxIterationMapValue)) {
                     testSuiteTestCaseMaxIterationMap[testSuiteTestCaseMaxIterationMapKey] = testSuiteTestCaseMaxIterationMapValue
                 }
             } else {

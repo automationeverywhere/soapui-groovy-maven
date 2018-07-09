@@ -1,12 +1,13 @@
 package com.ae.framework
 
 import com.ae.model.TestExecutionResult
+import com.eviware.soapui.model.support.MessageExchangeUtil
 import groovy.json.JsonSlurper
-import org.apache.log4j.Logger
+
 
 class FrameworkUtils implements Constants {
 
-    private final static Logger logger = Logger.getLogger(FrameworkUtils.class);
+//    public Logger logger = Logger.getLogger(FrameworkUtils.class)
 
     /**
      *
@@ -22,7 +23,7 @@ class FrameworkUtils implements Constants {
         setReportObjects(project)
         setCustomDataVariable(project)
 //        DBUtils.getOracleDBObject(project)
-        logger.debug("Project Setup Completed")
+
     }
 
     /**
@@ -200,7 +201,7 @@ class FrameworkUtils implements Constants {
                         }
                     }
                     if (testCase.getTestStepAt(stepCount).config.type.toString().contains("request")) {
-                        printRequestResponse(testCase, testCase.getTestStepAt(stepCount).name, itr)
+                        printRequestResponse(testCase, testCase.getTestStepAt(stepCount).name, itr,result,false)
                     }
                 }
             }
@@ -306,11 +307,14 @@ class FrameworkUtils implements Constants {
      * @param testStepName
      * @param iterationNum
      */
-    static def printRequestResponse(testCase, testStepName, iterationNum) {
-        if (testCase.testSuite.project.getContext().appProperties.capturePOT.toString().equalsIgnoreCase("true")) {
+    static def printRequestResponse(testCase, testStepName, iterationNum, result, explicitCall) {
+        if (testCase.testSuite.project.getContext().appProperties.capturePOT.toString().equalsIgnoreCase("true") || explicitCall) {
+            def resultsList = []
+            resultsList.add(result)
+            def messageExchange = MessageExchangeUtil.findMessageExchangeByTestStepId(resultsList,testCase.getTestStepByName(testStepName).getId())
             def outFileName = "${testCase.testSuite.project.getContext().resultsPath}/${testCase.testSuite.name}__${testCase.name}__Iteration-${iterationNum}__${testStepName}.txt"
             def outFile = new File(outFileName)
-            outFile.append("${REQUEST_PRINT}${testCase.getTestStepByName(testStepName).getProperty(REQUEST_PROPERTY).value}${RESPONSE_PRINT}${testCase.getTestStepByName(testStepName).getProperty(RESPONSE_PROPERTY).value}${ASSERTION_RESULT_PRINT}")
+            outFile.append("${REQUEST_PRINT}${messageExchange.getRequestContent().toString()}${RESPONSE_PRINT}${messageExchange.getResponseContent().toString()}${ASSERTION_RESULT_PRINT}")
             def assertList = testCase.getTestStepByName(testStepName).getAssertionList()
             for (assertion in assertList) {
                 def status = assertion.getStatus()
