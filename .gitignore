@@ -4,3 +4,4 @@ logs/*
 *.log
 *.iml
 target/*
+ext/soapui-groovy-maven-1.0-SNAPSHOT.jar
